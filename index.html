@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhotoGallery - API Showcase</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>PhotoGallery</h1>
+            <p>A showcase of photos from JSONPlaceholder API</p>
+        </header>
+        
+        <div class="controls">
+            <div class="search-container">
+                <input type="text" id="search" placeholder="Search by title...">
+                <button id="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <div class="filter-container">
+                <select id="album-filter">
+                    <option value="0">All Albums</option>
+                </select>
+                
+                <select id="sort-by">
+                    <option value="default">Default Order</option>
+                    <option value="title-asc">Title (A-Z)</option>
+                    <option value="title-desc">Title (Z-A)</option>
+                    <option value="id-asc">ID (Ascending)</option>
+                    <option value="id-desc">ID (Descending)</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="gallery-stats">
+            <p>Showing <span id="showing-count">0</span> of <span id="total-count">0</span> photos</p>
+        </div>
+        
+        <div class="gallery" id="gallery">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Loading photos...</p>
+            </div>
+        </div>
+        
+        <div class="pagination">
+            <button id="prev-page" disabled><i class="fas fa-chevron-left"></i> Previous</button>
+            <span id="page-info">Page 1 of 1</span>
+            <button id="next-page" disabled>Next <i class="fas fa-chevron-right"></i></button>
+        </div>
+        
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="modal-image-container">
+                    <img id="modal-image" src="" alt="Full size photo">
+                </div>
+                <div class="modal-details">
+                    <h2 id="modal-title"></h2>
+                    <p>Album: <span id="modal-album"></span></p>
+                    <p>Photo ID: <span id="modal-id"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 PhotoGallery App</p>
+            <p>Data provided by <a href="https://jsonplaceholder.typicode.com/" target="_blank">JSONPlaceholder API</a></p>
+        </div>
+    </footer>
+    
+    <script src="js/app.js"></script>
+</body>
+</html> 
