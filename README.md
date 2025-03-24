@@ -101,6 +101,48 @@ If you encounter issues:
 
 [MIT License](LICENSE)
 
+
+# 1. Install Certbot if not already installed
+sudo apt update
+sudo apt install -y certbot
+
+# 2. Stop HAProxy temporarily to free up port 80/443 for the standalone verification
+sudo systemctl stop haproxy
+
+# 3. Obtain certificate using standalone mode
+sudo certbot certonly --standalone -d www.jamesllc.tech
+
+# 4. Combine certificate and private key files for HAProxy
+sudo cat /etc/letsencrypt/live/www.jamesllc.tech/fullchain.pem \
+     /etc/letsencrypt/live/www.jamesllc.tech/privkey.pem > /etc/haproxy/www.jamesllc.pem
+
+# 5. Set proper permissions for the combined certificate file
+sudo chmod 600 /etc/haproxy/www.jamesllc.pem
+
+# 6. Update HAProxy configuration to use the SSL certificate
+# Edit /etc/haproxy/haproxy.cfg and add/modify the frontend section to include:
+#
+# frontend www-https
+#    bind *:443 ssl crt /etc/haproxy/www.jamesllc.pem
+#    reqadd X-Forwarded-Proto:\ https
+#    default_backend www-backend
+
+# 7. Restart HAProxy to apply changes
+sudo systemctl restart haproxy
+
+# 8. Set up auto-renewal for the certificate
+# Create a renewal script
+sudo bash -c 'cat > /etc/letsencrypt/renewal-hooks/post/haproxy.sh << EOL
+#!/bin/bash
+cat /etc/letsencrypt/live/www.jamesllc.tech/fullchain.pem \
+    /etc/letsencrypt/live/www.jamesllc.tech/privkey.pem > /etc/haproxy/www.jamesllc.pem
+chmod 600 /etc/haproxy/www.jamesllc.pem
+systemctl reload haproxy
+EOL'
+
+# Make the renewal script executable
+sudo chmod +x /etc/letsencrypt/renewal-hooks/post/haproxy.sh
+
 ## Author
 
 James Mukunzi
