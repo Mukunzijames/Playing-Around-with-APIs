@@ -101,7 +101,7 @@ If you encounter issues:
 
 [MIT License](LICENSE)
 
-
+```bash
 # 1. Install Certbot if not already installed
 sudo apt update
 sudo apt install -y certbot
@@ -142,6 +142,7 @@ EOL'
 
 # Make the renewal script executable
 sudo chmod +x /etc/letsencrypt/renewal-hooks/post/haproxy.sh
+```
 
 ## Author
 
