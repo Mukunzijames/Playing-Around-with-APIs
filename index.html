@@ -3,78 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PhotoGallery - API Showcase</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>🤖 Jaeve AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>PhotoGallery</h1>
-            <p>A showcase of photos from JSONPlaceholder API</p>
-        </header>
-        
-        <div class="controls">
-            <div class="search-container">
-                <input type="text" id="search" placeholder="Search by title...">
-                <button id="search-btn"><i class="fas fa-search"></i></button>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2> Jaeve history</h2>
+                <div class="sidebar-actions">
+                    <button class="search-toggle-btn" title="Search conversations">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M21 21L16.65 16.65" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <button class="new-chat-btn" title="New conversation">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 5V19M5 12H19" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="search-container" style="display: none;">
+                <div class="search-input-container">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M21 21L16.65 16.65" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <input type="text" placeholder="Search conversations..." class="search-input">
+                    <button class="clear-search-btn" style="display: none;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18 6L6 18M6 6L18 18" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="date-separator">
+                <span>Today</span>
+            </div>
+
+            <div class="conversation-list">
+                <!-- Conversation history will be populated here -->
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header-fixed">
+                <div class="sparkle-icon">✨</div>
+                <h1>Ask <span class="ai-highlight">Jaeve AI</span> anything</h1>
             </div>
             
-            <div class="filter-container">
-                <select id="album-filter">
-                    <option value="0">All Albums</option>
-                </select>
+            <div class="chat-container">
+                <div class="chat">
+                    <!-- Chat messages will appear here -->
+                </div>
                 
-                <select id="sort-by">
-                    <option value="default">Default Order</option>
-                    <option value="title-asc">Title (A-Z)</option>
-                    <option value="title-desc">Title (Z-A)</option>
-                    <option value="id-asc">ID (Ascending)</option>
-                    <option value="id-desc">ID (Descending)</option>
-                </select>
-            </div>
-        </div>
-        
-        <div class="gallery-stats">
-            <p>Showing <span id="showing-count">0</span> of <span id="total-count">0</span> photos</p>
-        </div>
-        
-        <div class="gallery" id="gallery">
-            <div class="loading">
-                <div class="spinner"></div>
-                <p>Loading photos...</p>
-            </div>
-        </div>
-        
-        <div class="pagination">
-            <button id="prev-page" disabled><i class="fas fa-chevron-left"></i> Previous</button>
-            <span id="page-info">Page 1 of 1</span>
-            <button id="next-page" disabled>Next <i class="fas fa-chevron-right"></i></button>
-        </div>
-        
-        <div id="modal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <div class="modal-image-container">
-                    <img id="modal-image" src="" alt="Full size photo">
+                <div class="suggestions">
+                    <h3>Suggestions on what to ask Jaeve AI</h3>
+                    <div class="suggestion-chips">
+                        <button class="suggestion-chip">What can I ask you to do?</button>
+                        <button class="suggestion-chip">Which one of my projects is performing the best?</button>
+                        <button class="suggestion-chip">What projects should I be concerned about right now?</button>
+                    </div>
                 </div>
-                <div class="modal-details">
-                    <h2 id="modal-title"></h2>
-                    <p>Album: <span id="modal-album"></span></p>
-                    <p>Photo ID: <span id="modal-id"></span></p>
-                </div>
+            </div>
+            
+            <div class="input-area">
+                <input placeholder="Ask me anything about your projects" type="text">
+                <button class="send-button">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 2L11 13" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
             </div>
         </div>
     </div>
+
+    <script type="importmap">
+        {
+          "imports": {
+            "@google/generative-ai": "https://esm.run/@google/generative-ai"
+          }
+        }
+    </script>
     
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2025 PhotoGallery App</p>
-            <p>Data provided by <a href="https://jsonplaceholder.typicode.com/" target="_blank">JSONPlaceholder API</a></p>
-        </div>
-    </footer>
-    
-    <script src="js/app.js"></script>
+    <script type="module" src="js/ai.js"></script>
 </body>
-</html> 
+</html>
