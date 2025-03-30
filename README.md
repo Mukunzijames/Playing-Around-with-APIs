@@ -15,6 +15,10 @@ This project demonstrates the setup and configuration of a load balancer using H
 
 Visit the live website to see the load-balanced setup in action!
 
+### Demo Video
+
+📺 **Watch the demo**: [View on Vimeo](https://vimeo.com/1070335450/07e98d7a00)
+
 ## Features
 
 - **Load Balancing**: Round-robin distribution across web-01 and web-02 servers
